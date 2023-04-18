@@ -2,10 +2,10 @@
 import argparse
 import sys
 
-from constants.informations import APPLICATION_DESCRIPTION, EPILOG_DESCRIPTION, INSTALLATION_GUIDE, VERSION_INFO
-from validators.credentials import credentials_validator
-
 from hey import __version__
+from hey.accounts.auth import User
+from hey.constants.informations import APPLICATION_DESCRIPTION, EPILOG_DESCRIPTION, INSTALLATION_GUIDE, VERSION_INFO
+from hey.validators.credentials import credentials_validator
 
 parser = argparse.ArgumentParser(
     description=APPLICATION_DESCRIPTION + '\n\r\n\r' + INSTALLATION_GUIDE,
@@ -27,19 +27,23 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    "--setup",
+    "--auth",
     type=credentials_validator,
-    help="your mindsdb credentials",
+    help="your mindsdb authenticating credentials in <email>:<password> pattern (e.g. abc@def.com:testpass)",
 )
 
 
 def main():
     args = parser.parse_args()
 
-    # TODO: check if credentials are valid
-    # TODO: check for config file (if exists, override)
+    if args.auth:
+        # TODO: Refactor User class to Connection class
+        user = User(**args.auth)
+        user.authenticate()
 
+    # TODO: check for config file (if exists, override)
     # TODO: deal with ask option
+
     return 0
 
 
