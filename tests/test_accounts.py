@@ -1,10 +1,8 @@
 import unittest
 
-from hey.credits.auth import Authentication
 
-
-class AuthenticationTestCase(unittest.TestCase):
-    """Tests for credits module"""
+class UserTestCase(unittest.TestCase):
+    """Tests for accounts module"""
 
     def test_something(self):
         """Test something."""
