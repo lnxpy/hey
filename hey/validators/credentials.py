@@ -21,9 +21,6 @@ def credentials_validator(phrase: str) -> Union[dict, None]:
     """
     if re.match(r"\S+@\S+:\S+", phrase):
         email, password = phrase.split(':')
-
-        # TODO: create Credentials class for validating and auth purposes
-
         return {
             'email': email,
             'password': password,
