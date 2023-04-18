@@ -7,7 +7,8 @@
 Hey is a CLI-based AI assistant that is powered by the ChatGPT AI model versions supported by [MindsDB](https://mindsdb.com/). This project is designed for [Hashnode X MindsDB](https://hashnode.com/hackathons/mindsdb?source=hncounter-feed) hackathon.
 
 <p align="center">
-    <a href="https://hashnode.com/hackathons/mindsdb?source=hncounter-feed"><img src="media/badge.svg" width=350 height=90></a>
+    <img src="media/badge-dark.svg#gh-dark-mode-only" width=350 height=90>
+    <img src="media/badge-light.svg#gh-light-mode-only" width=350 height=90>
 </p>
 
 ### Installation
