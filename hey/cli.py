@@ -72,15 +72,19 @@ def main():
         )
 
     if args.ask:
-        instance = MindsDB(
-            email=credentials.username,
-            password=credentials.password
-        )
-        instance.authenticate()
+        with console.status('Creating instance..'):
+            instance = MindsDB(
+                email=credentials.username,
+                password=credentials.password
+            )
 
-        console.print(instance.answer(
-            ' '.join(args.ask)
-        ))
+        with console.status('Authenticating..', spinner='dots2'):
+            instance.authenticate()
+
+        with console.status('Hey is typing..'):
+            console.print(instance.answer(
+                ' '.join(args.ask)
+            ))
 
     return 0
 
