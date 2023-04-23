@@ -2,7 +2,7 @@
 APPLICATION_DESCRIPTION = 'Hey is your AI-powered pair programming friend that helps you speed up your productivity.'
 
 # link to installation guide
-INSTALLATION_GUIDE = 'Check out https://imsadra/introducing-hey-your-ai-powered-pair-programming-friend/ for ' \
+INSTALLATION_GUIDE = 'Check out https://github.com/lnxpy/hey for ' \
                      'installation guide. '
 
 # epilog information
