@@ -75,10 +75,10 @@ class MindsDB:
         """
         takes the question and queries then converts the response into `rich.Markdown`
         Args:
-            question: 
+            question: the value from `ask` positional argument
 
         Returns:
-
+            response from MindsDB in Markdown format
         """
         return Markdown(to_data(
             self.database.query(
