@@ -7,16 +7,17 @@ from rich.markdown import Markdown
 from hey.constants.service import MINDSDB_HOST
 from hey.exceptions.auth import CredentialsError
 from hey.exceptions.connection import NetworkError
+from hey.templates.mindsdb_queries import SQL_ASK_QUERY
 
 
 def to_data(dataframe: DataFrame) -> str:
     """
-    takes a pandas dataframe and returns the first value from the first column
+    takes a pandas `DataFrame` and returns the first value from the first column
     Args:
-        dataframe:
+        dataframe: the dataframe returned from MindsDB that stores the answer in the first cell of column
 
     Returns:
-        first value of the first column of dataframe that GPT responses
+        first value of the first column of dataframe that MindsDB responses
     """
     return dataframe.iloc[:, 0].values[0]
 
@@ -25,13 +26,6 @@ class MindsDB:
     """
     MindsDB manager class
     """
-
-    SQL_ASKING_QUERY = '''
-    SELECT response
-    FROM mindsdb.gpt_model
-    WHERE author_username = "mindsdb"
-    AND text = "{}";
-    '''
 
     def __init__(self, email: str, password: str) -> None:
         """
@@ -80,8 +74,9 @@ class MindsDB:
         Returns:
             response from MindsDB in Markdown format
         """
+
         return Markdown(to_data(
             self.database.query(
-                MindsDB.SQL_ASKING_QUERY.format(question)
+                SQL_ASK_QUERY.substitute(ask=question)
             ).fetch()
         ))
