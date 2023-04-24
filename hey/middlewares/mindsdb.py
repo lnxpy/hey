@@ -1,3 +1,5 @@
+from getpass import getuser
+
 import mindsdb_sdk
 from mindsdb_sdk.server import Server, Database
 from pandas import DataFrame
@@ -77,6 +79,9 @@ class MindsDB:
 
         return Markdown(to_data(
             self.database.query(
-                SQL_ASK_QUERY.substitute(ask=question)
+                SQL_ASK_QUERY.substitute(
+                    ask=question,
+                    user=getuser(),
+                )
             ).fetch()
         ))
