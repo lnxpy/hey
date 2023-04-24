@@ -24,6 +24,8 @@ pip install -U hey-mindsdb
 pip install git+http://github.com/lnxpy/hey.git
 ```
 
+> :warning:: Hey is POSIX-friendly. It might not work properly on the Windows machines at the moment.
+
 </details>
 
 <details>
