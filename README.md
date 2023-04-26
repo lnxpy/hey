@@ -2,7 +2,7 @@
 
 > :basecamp: - Watch this YouTube <a href="https://www.youtube.com/watch?v=fhO34PVa-38&list=LL&index=9">introduction video</a> about Hey!
 
-> :writing_hand: - Read the <a href="https://imsadra/introducing-hey-your-ai-powered-pair-programming-friend">"Introducing Hey! - Your AI-powered Pair Programming Friend"</a> article about the creation process, development phases, and a detailed overview of Hey.
+> :writing_hand: - Read the <a href="https://imsadra.me/introducing-hey-your-ai-powered-pair-programming-friend">"Introducing Hey! - Your AI-powered Pair Programming Friend"</a> article about the creation process, development phases, and a detailed overview of Hey.
 
 > :package: - Check out <a href="https://pypi.org/project/hey-mindsdb/">Hey on PyPI</a>.
 
@@ -112,7 +112,7 @@ Here's an example:
     - [PyPI](https://pypi.org)
 
 ### License
-Hey is being licensed under the [MIT License](LICENSE).
+Hey is being licensed under the [MIT License](https://github.com/lnxpy/hey/blob/main/LICENSE).
 
 ### Special Thanks to
 [MindsDB](https://mindsdb.com) X [Hashnode](https://hashnode.com) for hosting this great hackathon.
