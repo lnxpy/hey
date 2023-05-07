@@ -7,7 +7,7 @@ from rich.console import Console
 
 from hey import __version__
 from hey.constants.informations import APPLICATION_DESCRIPTION, EPILOG_DESCRIPTION, INSTALLATION_GUIDE, VERSION_INFO
-from hey.constants.service import SERVICE_NAME
+from hey.constants.service import KEYRING_SERVICE_NAME
 from hey.constants.system import LOCAL_EMAIL_ADDRESS_VARIABLE_NAME
 from hey.exceptions.system import BrokenCredentials, EmailEnvVarNotExists, KeyringIssue
 from hey.middlewares.mindsdb import MindsDB
@@ -16,6 +16,7 @@ parser = argparse.ArgumentParser(
     description=APPLICATION_DESCRIPTION + '\n\r\n\r' + INSTALLATION_GUIDE,
     epilog=EPILOG_DESCRIPTION,
     formatter_class=argparse.RawDescriptionHelpFormatter,
+    prog='hey',
 )
 
 parser.add_argument(
@@ -47,7 +48,7 @@ def main():
         if email_address:
             try:
                 keyring.set_password(
-                    service_name=SERVICE_NAME.lower(),
+                    service_name=KEYRING_SERVICE_NAME.lower(),
                     username=email_address,
                     password=args.set_password,
                 )
@@ -62,7 +63,7 @@ def main():
                                        f'variable properly.')
 
     credentials = keyring.get_credential(
-        service_name=SERVICE_NAME.lower(),
+        service_name=KEYRING_SERVICE_NAME.lower(),
         username=os.environ.get(LOCAL_EMAIL_ADDRESS_VARIABLE_NAME),
     )
 
