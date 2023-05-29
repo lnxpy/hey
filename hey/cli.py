@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+from getpass import getpass
 
 import keyring
 from rich.console import Console
@@ -31,10 +32,9 @@ parser.add_argument(
 )
 
 parser.add_argument(
-    '--set-password',
-    type=str,
+    '--auth',
+    action='store_true',
     help='set your mindsdb account password',
-    metavar='',
 )
 
 
@@ -42,14 +42,15 @@ def main():
     args = parser.parse_args()
     console = Console()
 
-    if args.set_password:
+    if args.auth:
         email_address = os.environ.get(LOCAL_EMAIL_ADDRESS_VARIABLE_NAME)
+        password = getpass(f'Password for ({email_address}):')
         if email_address:
             try:
                 keyring.set_password(
                     service_name=SERVICE_NAME.lower(),
                     username=email_address,
-                    password=args.set_password,
+                    password=password,
                 )
             except Exception as _:
                 raise KeyringIssue(
