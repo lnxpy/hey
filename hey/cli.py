@@ -7,10 +7,15 @@ import keyring
 from rich.console import Console
 
 from hey import __version__
-from hey.constants.informations import APPLICATION_DESCRIPTION, EPILOG_DESCRIPTION, INSTALLATION_GUIDE, VERSION_INFO
+from hey.constants.informations import APPLICATION_DESCRIPTION
+from hey.constants.informations import EPILOG_DESCRIPTION
+from hey.constants.informations import INSTALLATION_GUIDE
+from hey.constants.informations import VERSION_INFO
 from hey.constants.service import SERVICE_NAME
 from hey.constants.system import LOCAL_EMAIL_ADDRESS_VARIABLE_NAME
-from hey.exceptions.system import BrokenCredentials, EmailEnvVarNotExists, KeyringIssue
+from hey.exceptions.system import BrokenCredentials
+from hey.exceptions.system import EmailEnvVarNotExists
+from hey.exceptions.system import KeyringIssue
 from hey.middlewares.mindsdb import MindsDB
 
 parser = argparse.ArgumentParser(
@@ -69,7 +74,7 @@ def main():
 
     if not credentials:
         raise BrokenCredentials(
-            f'Make sure you have set your {LOCAL_EMAIL_ADDRESS_VARIABLE_NAME} and password via --set-password.'
+            f'Make sure you have set your {LOCAL_EMAIL_ADDRESS_VARIABLE_NAME} and password via --auth.'
         )
 
     if args.ask:
