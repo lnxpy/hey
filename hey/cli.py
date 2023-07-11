@@ -11,7 +11,7 @@ from hey.constants.informations import APPLICATION_DESCRIPTION
 from hey.constants.informations import EPILOG_DESCRIPTION
 from hey.constants.informations import INSTALLATION_GUIDE
 from hey.constants.informations import VERSION_INFO
-from hey.constants.service import SERVICE_NAME
+from hey.constants.service import KEYRING_SERVICE_NAME
 from hey.constants.system import LOCAL_EMAIL_ADDRESS_VARIABLE_NAME
 from hey.exceptions.system import BrokenCredentials
 from hey.exceptions.system import EmailEnvVarNotExists
