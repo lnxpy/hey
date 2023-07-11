@@ -49,13 +49,13 @@ echo "export MINDSDB_EMAIL_ADDRESS=<EMAIL>" >> ~/.zshrc
 <details>
   <summary><h4>3. Set your MindsDB account password</h4></summary>
 
-Now, it's time to set your account's password. Simply run `hey` with `--set-password` followed by your MindsDB account password to set your password.
+Now, it's time to set your account's password. Simply run `hey` with the `--auth` option and enter your MindsDB account password.
 
 ```sh
-hey --set-password <PASSWORD>
+hey --auth
 ```
 
-You're ready to go. :)
+You're all set to go. :)
 
 </details>
 

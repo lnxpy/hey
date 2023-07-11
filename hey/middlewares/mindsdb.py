@@ -45,8 +45,6 @@ class MindsDB:
     def authenticate(self) -> None:
         """
         authorizes the email and password with MindsDB's host
-        Returns:
-            server object
         """
 
         try:
