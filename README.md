@@ -114,7 +114,7 @@ Here's an example:
     - [PyPI](https://pypi.org)
 
 ### Package Stats
-![stats](assets/stats.svg)
+![stats](media/stats.svg)
 
 ### License
 Hey is being licensed under the [MIT License](https://github.com/lnxpy/hey/blob/main/LICENSE).
