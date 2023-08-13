@@ -113,6 +113,9 @@ Here's an example:
     - [MindsDB](https://mindsdb.com)
     - [PyPI](https://pypi.org)
 
+### Package Stats
+![stats](assets/stats.svg)
+
 ### License
 Hey is being licensed under the [MIT License](https://github.com/lnxpy/hey/blob/main/LICENSE).
 
