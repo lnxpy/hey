@@ -1,0 +1,22 @@
+name: Stats Chart Updater
+
+on:
+  schedule:
+    - cron: '0 0 1 * *' # runs every month
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        
+      - uses: lnxpy/pypi-stats-viewer@v0.1.0
+        with:
+          package: hey-mindsdb
+
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: chart is updated
