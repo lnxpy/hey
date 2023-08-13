@@ -3,6 +3,7 @@ name: Stats Chart Updater
 on:
   schedule:
     - cron: '0 0 1 * *' # runs every month
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,6 +16,8 @@ jobs:
       - uses: lnxpy/pypi-stats-viewer@v0.1.0
         with:
           package: hey-mindsdb
+          output: media/stats.svg
+          theme: plotly_dark
 
       - uses: EndBug/add-and-commit@v9
         with:
