@@ -1,9 +1,9 @@
 from getpass import getuser
 
 import mindsdb_sdk
-from mindsdb_sdk.server import Server, Database
+from mindsdb_sdk.server import Databases, Server
 from pandas import DataFrame
-from requests.exceptions import HTTPError, ConnectionError
+from requests.exceptions import ConnectionError, HTTPError
 from rich.markdown import Markdown
 
 from hey.constants.service import MINDSDB_HOST
@@ -40,7 +40,7 @@ class MindsDB:
         self.password = password
 
         self.is_authenticated: bool = False
-        self.database: Database
+        self.database: Databases
 
     def authenticate(self) -> None:
         """
@@ -54,15 +54,19 @@ class MindsDB:
                 password=self.password,
             )
         except HTTPError:
-            raise CredentialsError('Email or password is incorrect. Make sure to enter the right credentials.')
+            raise CredentialsError(
+                "Email or password is incorrect. Make sure to enter the right credentials."
+            )
         except ConnectionError:
-            raise NetworkError('Make sure you have access to the internet and try again.')
+            raise NetworkError(
+                "Make sure you have access to the internet and try again."
+            )
 
         self.is_authenticated = True
         self.database = self.collect_database(server)
 
     @staticmethod
-    def collect_database(server: Server) -> Database:
+    def collect_database(server: Server) -> Databases:
         return server.list_databases()[0]
 
     def answer(self, question: str) -> Markdown:
@@ -75,11 +79,13 @@ class MindsDB:
             response from MindsDB in Markdown format
         """
 
-        return Markdown(to_data(
-            self.database.query(
-                SQL_ASK_QUERY.substitute(
-                    ask=question,
-                    user=getuser(),
-                )
-            ).fetch()
-        ))
+        return Markdown(
+            to_data(
+                self.database.query(
+                    SQL_ASK_QUERY.substitute(
+                        ask=question,
+                        user=getuser(),
+                    )
+                ).fetch()
+            )
+        )
