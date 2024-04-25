@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
         
-      - uses: lnxpy/pypi-stats-viewer@v0.1.0
+      - uses: lnxpy/pypi-stats-viewer@v1
         with:
           package: hey-mindsdb
           output: media/stats.svg
