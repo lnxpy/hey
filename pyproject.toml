@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "hey_mindsdb"
-version = "0.2.0"
+version = "0.3.0"
 description = "Your AI-powered pair programming friend"
 authors = [{ name = "Sadra Yahyapour", email = "lnxpylnxpy@gmail.com" }]
 requires-python = ">=3.8"
@@ -44,7 +44,7 @@ Repository = "https://github.com/lnxpy/hey"
 packages = ["hey"]
 
 [tool.bumpversion]
-current_version = "0.2.0"
+current_version = "0.3.0"
 commit = "true"
 tag = "true"
 
