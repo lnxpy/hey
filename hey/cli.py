@@ -1,100 +1,76 @@
-import argparse
-import os
-import sys
-from getpass import getpass
+from datetime import datetime
+from typing import Annotated, Optional
 
-import keyring
-from rich.console import Console
+import typer
+from rich.markdown import Markdown
+from rich.panel import Panel
 
-from hey import __version__
-from hey.constants.informations import APPLICATION_DESCRIPTION
-from hey.constants.informations import EPILOG_DESCRIPTION
-from hey.constants.informations import INSTALLATION_GUIDE
-from hey.constants.informations import VERSION_INFO
-from hey.constants.service import KEYRING_SERVICE_NAME
-from hey.constants.system import LOCAL_EMAIL_ADDRESS_VARIABLE_NAME
-from hey.exceptions.system import BrokenCredentials
-from hey.exceptions.system import EmailEnvVarNotExists
-from hey.exceptions.system import KeyringIssue
-from hey.middlewares.mindsdb import MindsDB
+from hey import __version__, console
+from hey.configs import cli, configs
+from hey.consts import APP_NAME
+from hey.editor import open_tmp_editor
+from hey.openai import answer
 
-parser = argparse.ArgumentParser(
-    description=APPLICATION_DESCRIPTION + '\n\r\n\r' + INSTALLATION_GUIDE,
-    epilog=EPILOG_DESCRIPTION,
-    formatter_class=argparse.RawDescriptionHelpFormatter,
-    prog='hey',
-)
-
-parser.add_argument(
-    'ask',
-    nargs='*',
-    help='ask what you need',
-)
-
-parser.add_argument(
-    '--version',
-    action='version',
-    version=VERSION_INFO.format(__version__),
-)
-
-parser.add_argument(
-    '--auth',
-    action='store_true',
-    help='set your mindsdb account password',
-)
+app = typer.Typer()
+app.add_typer(cli.app, name="config")
 
 
-def main():
-    args = parser.parse_args()
-    console = Console()
+def version_callback(value: bool):
+    if value:
+        print(f"Hey - {__version__}!")
+        raise typer.Exit()
 
-    if args.auth:
-        email_address = os.environ.get(LOCAL_EMAIL_ADDRESS_VARIABLE_NAME)
-        password = getpass(f'Password for ({email_address}):')
-        if email_address:
-            try:
-                keyring.set_password(
-                    service_name=KEYRING_SERVICE_NAME.lower(),
-                    username=email_address,
-                    password=password,
-                )
-            except Exception as _:
-                raise KeyringIssue(
-                    'There is something wrong with your OS keyring system. Make sure you have right access to run hey '
-                    'on your system. '
-                )
-            console.print(f'Password successfully set for {email_address}!')
-        else:
-            raise EmailEnvVarNotExists(f'Make sure you have defined {LOCAL_EMAIL_ADDRESS_VARIABLE_NAME} environment '
-                                       f'variable properly.')
 
-    credentials = keyring.get_credential(
-        service_name=KEYRING_SERVICE_NAME.lower(),
-        username=os.environ.get(LOCAL_EMAIL_ADDRESS_VARIABLE_NAME),
-    )
+@app.callback(invoke_without_command=True)
+def main(
+    ctx: typer.Context,
+    no_style: Annotated[
+        bool, typer.Option("--no-style", "--ns", help="Don't style the output.")
+    ] = configs.get("never_style"),
+    version: Annotated[
+        Optional[bool],
+        typer.Option(
+            "--version",
+            "-V",
+            callback=version_callback,
+            help=f"Show the current version of {APP_NAME}.",
+        ),
+    ] = None,
+):
+    """
+    Hey is a pair-programming friend that interacts with ChatGPT and responds back in a pretty style. ✨
+    """
 
-    if not credentials:
-        raise BrokenCredentials(
-            f'Make sure you have set your {LOCAL_EMAIL_ADDRESS_VARIABLE_NAME} and password via --auth.'
+    if ctx.invoked_subcommand is None:
+        user_input = open_tmp_editor()
+        markdown_input = Markdown(
+            user_input, code_theme=configs.get("code_block_theme")
         )
 
-    if args.ask:
-        with console.status('Creating instance..'):
-            instance = MindsDB(
-                email=credentials.username,
-                password=credentials.password
-            )
+        user_panel = Panel(
+            markdown_input,
+            title=":bust_in_silhouette:",
+            title_align="left",
+            subtitle=datetime.now().strftime("%H:%M"),
+            subtitle_align="right",
+            style="blue",
+        )
 
-        with console.status('Authenticating..', spinner='dots2'):
-            instance.authenticate()
-
-        with console.status('Hey is typing..'):
-            console.print(instance.answer(
-                ' '.join(args.ask)
-            ))
-
-    return 0
+        console.print(user_panel)
+        result = answer(user_input, no_style)
+        console.print(result)
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+@app.command()
+def ask(
+    user_input: str,
+    no_style: Annotated[
+        bool, typer.Option("--no-style", "--ns", help="Don't style the output.")
+    ] = configs.get("never_style"),
+):
+    """
+    Ask Hey directly in-command.
+    """
+
+    result = answer(user_input, no_style)
+    console.print(result)

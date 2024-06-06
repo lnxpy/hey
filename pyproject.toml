@@ -1,0 +1,55 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hey_mindsdb"
+version = "0.3.0"
+description = "Your AI-powered pair programming friend"
+authors = [{ name = "Sadra Yahyapour", email = "lnxpylnxpy@gmail.com" }]
+requires-python = ">=3.8"
+dependencies = [
+    "typer >= 0.12.3",
+    "rich >= 13.7.1",
+    "openai >= 1.30.1",
+    "platformdirs >= 4.2.2"
+]
+readme = { file = "README.md", content-type = "text/markdown" }
+license = { file = "LICENSE" }
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3 :: Only",
+]
+
+[project.scripts]
+hey = "hey.cli:app"
+
+[project.optional-dependencies]
+dev = ["coverage", "pytest-cookies"]
+
+[project.urls]
+Repository = "https://github.com/lnxpy/hey"
+
+[tool.hatch.build.targets.wheel]
+packages = ["hey"]
+
+[tool.bumpversion]
+current_version = "0.3.0"
+commit = "true"
+tag = "true"
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+
+[[tool.bumpversion.files]]
+filename = "hey/__init__.py"
