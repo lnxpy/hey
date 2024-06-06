@@ -1,12 +1,10 @@
 ## Hey! - Your AI-powered Pair Programming Friend
 
-> :warning: - You need OpenAI auth token to make Hey work.
+> :sparkles: - You need a MindsDB token to use Hey. You can generate one for your personal uses for free from [here](mdb.ai)!
 
 > :basecamp: - Watch this YouTube <a href="https://www.youtube.com/watch?v=fhO34PVa-38&list=LL&index=9">introduction video</a> about Hey!
 
 > :writing_hand: - Read the <a href="https://blog.imsadra.me/introducing-hey-your-ai-powered-pair-programming-friend">"Introducing Hey! - Your AI-powered Pair Programming Friend"</a> article about the creation process, development phases, and a detailed overview of Hey.
-
-> :package: - Check out <a href="https://pypi.org/project/hey-mindsdb/">Hey on PyPI</a>.
 
 Hey is a CLI-based AI assistant that is powered by the ChatGPT AI model versions supported by [MindsDB](https://mindsdb.com/). This project is designed for [Hashnode X MindsDB](https://hashnode.com/hackathons/mindsdb?source=hncounter-feed) hackathon.
 
@@ -26,92 +24,112 @@ pip install -U hey-mindsdb
 pip install git+http://github.com/lnxpy/hey.git
 ```
 
-> :warning:: Hey is POSIX-friendly. It might not work properly on the Windows machines at the moment.
+> :warning:: Hey is POSIX-friendly. It might not work properly on Windows machines at the moment.
 
 </details>
 
 <details>
-  <summary><h4>2. Set the <code>MINDSDB_EMAIL_ADDRESS</code> environment variable</h4></summary>
+  <summary><h4>2. Set the <code>HEY_TOKEN</code> environment variable</h4></summary>
 
-Once you got the package installed on your system, it's time to add the `MINDSDB_EMAIL_ADDRESS` environment variable. Create an account on [mindsdb.com](https://mindsdb.com/), train your GPT model and replace your email with `<EMAIL>` in the following options.
+Once you got the package installed on your system, it's time to add the token that you just copied from [mdb.ai](https://mdb.ai) into either the `.bashrc` (or `.zshrc`) file.
 
-##### > If you use the default bash shell
+- If you use the default bash shell
 ```sh
-echo "export MINDSDB_EMAIL_ADDRESS=<EMAIL>" >> ~/.bashrc
+echo "export HEY_TOKEN=<TOKEN>" >> ~/.bashrc
 ```
-##### > If you use ZSH
+- If you use ZSH
 ```sh
-echo "export MINDSDB_EMAIL_ADDRESS=<EMAIL>" >> ~/.zshrc
+echo "export HEY_TOKEN=<TOKEN>" >> ~/.zshrc
 ```
-
-> :bulb:: Read the article for more information about training your MindsDB model.
-
-</details>
-
-<details>
-  <summary><h4>3. Set your MindsDB account password</h4></summary>
-
-Now, it's time to set your account's password. Simply run `hey` with the `--auth` option and enter your MindsDB account password.
-
-```sh
-hey --auth
-```
-
-You're all set to go. :)
 
 </details>
 
 ### Usage
-Use `hey` followed by your question and it'll process the phrase and responses back the content in Markdown.
+There are different commands and sub-commands implemented once you install `hey`. Check them out via the `--help` flag.
 
-```
-$ hey generate a power function in javascript
-To generate a power function in JavaScript, you can use the built-in Math.pow()
-method. Here's an example of how to create a power function using JavaScript:
-
-
- function powerFunction(base, exponent) {
-   return Math.pow(base, exponent);
- }
-
- // Example usage:
- console.log(powerFunction(2, 3)); // Output: 8
- console.log(powerFunction(5, 2)); // Output: 25
+```sh
+hey --help
 ```
 
 ```
-$ hey tell me a programming joke
-Why do programmers always mix up Christmas and Halloween?
-
-Because Oct 31 == Dec 25!
+                                                                                                 
+ Usage: hey [OPTIONS] COMMAND [ARGS]...                                                          
+                                                                                                 
+ Hey is a pair-programming friend that interacts with ChatGPT and responds back in a pretty      
+ style. ✨                                                                                       
+                                                                                                 
+╭─ Options ─────────────────────────────────────────────────────────────────────────────────────╮
+│ --no-style,--ns                 Don't style the output.                                       │
+│ --version             -V        Show the current version of Hey.                              │
+│ --install-completion            Install completion for the current shell.                     │
+│ --show-completion               Show completion for the current shell, to copy it or          │
+│                                 customize the installation.                                   │
+│ --help                          Show this message and exit.                                   │
+╰───────────────────────────────────────────────────────────────────────────────────────────────╯
+╭─ Commands ────────────────────────────────────────────────────────────────────────────────────╮
+│ ask      Ask Hey directly in-command.                                                         │
+│ config   Configuration management.                                                         │
+╰───────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
-```
-$ hey add annotations to this function: $(cat file.py)
-To add annotations to the given Python function, you can include comments and
-docstrings to provide more information about the function's purpose and usage.
-Here's an example:
+- If you want to use `Hey` in a fast and quick way, use the `ask` command.
 
+  ```sh
+  hey ask "explain the duality term in quantum physics."
+  ```
 
- # Importing the required module from setuptools package
- from setuptools import setup
+- If your query needs more explanations with code snippets maybe, they just `hey`.
 
- # Function to setup MindsDB package
- def mindsdb_setup():
-     """
-     This function sets up the MindsDB package using the setup() function from
- setuptools.
-     """
-     # Calling the setup() function to configure the package
-     setup()
+  ```sh
+  hey
+  <OPENS EDITOR>
+  ```
+
+  > Keep in mind that when you run `hey` with no sub-commands, the default `$EDITOR` will be used. Feel free to ask your question in markdown style.
+
+### Configuration
+There is a command dedicated for more customizability. Check the following bullet-points.
+
+- Create a base configuration file.
+
+  ```sh
+  hey config create
+  ```
+
+- View and edit the configuration file.
+
+  ```sh
+  hey config edit
+  ```
+
+Here is more information about each configuration parameter.
+
+```json
+{
+    // model version
+    "model": "gpt-3.5-turbo",
+
+    // prompt
+    "prompt": "Answer in a helpful way.",
+
+    // themes used for the codeblocks
+    "code_block_theme": "github-light",
+
+    // how would you like `hey` to think?
+    "loading_text": "Thinking..",
+
+    // thinking animation symbol
+    // check out full list: python -m rich.spinner
+    "loading_spinner": "dots",
+
+    // never style the output (in case you need to copy the result)
+    "never_style": false
+}
 ```
 
 ### Tech Stack
-- Tools
-    - [Python](https://python.org)
 - Infrastructures & Hosting
-    - [MindsDB](https://mindsdb.com)
-    - [PyPI](https://pypi.org)
+    - [MindsDB](https://mdb.ai)
 
 ### Package Stats
 ![stats](media/stats.svg)
