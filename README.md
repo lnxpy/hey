@@ -68,7 +68,7 @@ hey --help
 ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
 ╭─ Commands ────────────────────────────────────────────────────────────────────────────────────╮
 │ ask      Ask Hey directly in-command.                                                         │
-│ config   Configuration management.                                                         │
+│ config   Configuration management.                                                            │
 ╰───────────────────────────────────────────────────────────────────────────────────────────────╯
 ```
 
@@ -130,9 +130,6 @@ Here is more information about each configuration parameter.
 ### Tech Stack
 - Infrastructures & Hosting
     - [MindsDB](https://mdb.ai)
-
-### Package Stats
-![stats](media/stats.svg)
 
 ### License
 Hey is being licensed under the [MIT License](https://github.com/lnxpy/hey/blob/main/LICENSE).
