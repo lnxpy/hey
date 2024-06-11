@@ -2,9 +2,7 @@ import os
 import subprocess
 import tempfile
 
-from rich.console import Console
-
-logger = Console()
+from hey.consts import DEFAULT_EDITOR
 
 
 def open_tmp_editor() -> str:
@@ -14,12 +12,13 @@ def open_tmp_editor() -> str:
         str: input string
     """
 
-    with tempfile.NamedTemporaryFile(mode="w+") as temp_file:
+    with tempfile.NamedTemporaryFile(mode="w+", delete=False) as temp_file:
         temp_file_path = temp_file.name
 
-        subprocess.run([os.environ["EDITOR"], temp_file_path])
+    subprocess.run([DEFAULT_EDITOR, temp_file_path])
 
-        with open(temp_file_path, "r") as file:
-            data = file.read()
+    with open(temp_file_path, "r") as file:
+        data = file.read()
 
-        return data
+    os.unlink(temp_file_path)
+    return data

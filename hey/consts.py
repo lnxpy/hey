@@ -1,3 +1,6 @@
+import os
+import platform
+
 from platformdirs import user_config_path
 
 # App name
@@ -6,6 +9,10 @@ APP_NAME = "Hey"
 # Service address
 SERVICE_URL = "https://llm.mdb.ai"
 
+if platform.system().lower() == "windows":
+    DEFAULT_EDITOR = os.environ.get("EDITOR", "notepad")
+else:
+    DEFAULT_EDITOR = os.environ.get("EDITOR", "vim")
 
 # basic configuration setup
 BASE_CONFIG = {
