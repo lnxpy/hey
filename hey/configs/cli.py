@@ -6,7 +6,7 @@ from rich.prompt import Confirm
 
 from hey import console
 from hey.configs.utils import app_dir_exists, config_exists, init_config
-from hey.consts import APP_CONFIG_DIR, CONFIG_FILE_PATH
+from hey.consts import APP_CONFIG_DIR, CONFIG_FILE_PATH, DEFAULT_EDITOR
 
 app = typer.Typer(help="Configuration management.")
 
@@ -30,4 +30,4 @@ def edit():
     if not app_dir_exists() or not config_exists():
         console.print("You don't have any config file. Try `hey config create` first.")
     else:
-        subprocess.run([os.environ["EDITOR"], CONFIG_FILE_PATH])
+        subprocess.run([DEFAULT_EDITOR, CONFIG_FILE_PATH])
