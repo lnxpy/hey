@@ -78,14 +78,14 @@ hey --help
   hey ask "explain the duality term in quantum physics."
   ```
 
-- If your query needs more explanations with code snippets maybe, they just `hey`.
+- If your question needs more explanations with code snippets, then just `hey`.
 
   ```sh
   hey
   <OPENS EDITOR>
   ```
 
-  > Keep in mind that when you run `hey` with no sub-commands, the default `$EDITOR` will be used. Feel free to ask your question in markdown style.
+  > Keep in mind that when you run `hey` with no sub-commands, the default `$EDITOR` will be used. If this environment variable is not set, then `vim` on Unix-like systems and `notepad` on Windows machines will be used by default.
 
 ### Configuration
 There is a command dedicated for more customizability. Check the following bullet-points.
