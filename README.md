@@ -1,5 +1,7 @@
 ## Hey! - Your AI-powered Pair Programming Friend
 
+<a href="https://www.producthunt.com/posts/hey-7fed5187-9b92-4ee8-9ce5-e08d5bc63d15?embed=true&utm_source=badge-featured&utm_medium=badge&utm_souce=badge-hey&#0045;7fed5187&#0045;9b92&#0045;4ee8&#0045;9ce5&#0045;e08d5bc63d15" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=483008&theme=light" alt="Hey&#0033; - AI&#0045;Powered&#0032;Pair&#0032;Programming&#0032;Friend&#0033;&#0032;✨ | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+
 > :basecamp: - Watch this YouTube <a href="https://www.youtube.com/watch?v=fhO34PVa-38&list=LL&index=9">introduction video</a> about Hey!
 
 > :writing_hand: - Read the <a href="https://blog.imsadra.me/introducing-hey-your-ai-powered-pair-programming-friend">"Introducing Hey! - Your AI-powered Pair Programming Friend"</a> article about the creation process, development phases, and a detailed overview of Hey.
