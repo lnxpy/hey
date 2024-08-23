@@ -1,12 +1,12 @@
 ## Hey! - Your AI-powered Pair Programming Friend
 
-> :sparkles: - You need a MindsDB token to use Hey. You can generate one for your personal uses for free from [here](mdb.ai)!
-
 > :basecamp: - Watch this YouTube <a href="https://www.youtube.com/watch?v=fhO34PVa-38&list=LL&index=9">introduction video</a> about Hey!
 
 > :writing_hand: - Read the <a href="https://blog.imsadra.me/introducing-hey-your-ai-powered-pair-programming-friend">"Introducing Hey! - Your AI-powered Pair Programming Friend"</a> article about the creation process, development phases, and a detailed overview of Hey.
 
 Hey is a CLI-based AI assistant that is powered by the ChatGPT AI model versions supported by [MindsDB](https://mindsdb.com/). This project is designed for [Hashnode X MindsDB](https://hashnode.com/hackathons/mindsdb?source=hncounter-feed) hackathon.
+
+You may need a MindsDB token to use Hey. You can generate one for your personal uses for free from [here](https://mdb.ai). You can set Hey to interact with any other LLM service URL though. You're not limited to mdb.ai.
 
 ### Installation
 Make sure you have `pip` and `python>=3.6` installed on your machine and follow the steps.
@@ -106,6 +106,9 @@ Here is more information about each configuration parameter.
 
 ```json
 {
+    // llm service URL
+    "service": "https://llm.mdb.ai",
+
     // model version
     "model": "gpt-3.5-turbo",
 
