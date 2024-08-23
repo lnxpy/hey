@@ -6,9 +6,6 @@ from platformdirs import user_config_path
 # App name
 APP_NAME = "Hey"
 
-# Service address
-SERVICE_URL = "https://llm.mdb.ai"
-
 if platform.system().lower() == "windows":
     DEFAULT_EDITOR = os.environ.get("EDITOR", "notepad")
 else:
@@ -16,6 +13,7 @@ else:
 
 # basic configuration setup
 BASE_CONFIG = {
+    "service": "https://llm.mdb.ai",
     "model": "gpt-3.5-turbo",
     "prompt": "Answer in a helpful way.",
     "code_block_theme": "github-light",

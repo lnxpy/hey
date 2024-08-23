@@ -7,7 +7,7 @@ from rich.markdown import Markdown
 from rich.panel import Panel
 
 from hey.configs import configs
-from hey.consts import BASE_CONFIG, SERVICE_URL
+from hey.consts import BASE_CONFIG
 from hey.exceptions import ConnectionIssue, TokenIsNotDefined
 
 
@@ -30,7 +30,7 @@ class ChatGPT:
     def __init__(
         self,
         model=configs.get("model", BASE_CONFIG["model"]),
-        prompt=configs.get("prompt", BASE_CONFIG["model"]),
+        prompt=configs.get("prompt", BASE_CONFIG["prompt"]),
         auth: Auth = None,
     ) -> None:
         self.auth = auth or Auth()
@@ -42,7 +42,10 @@ class ChatGPT:
         if not text:
             raise ValueError("provide a valid input.")
         try:
-            client_mindsdb_serve = OpenAI(api_key=self.token, base_url=SERVICE_URL)
+            client_mindsdb_serve = OpenAI(
+                api_key=self.token,
+                base_url=configs.get("service", BASE_CONFIG["service"]),
+            )
             chat_completion_gpt = client_mindsdb_serve.chat.completions.create(
                 messages=[
                     {
