@@ -4,4 +4,4 @@ console = Console()
 
 __author__ = "Sadra Yahyapour"
 __email__ = "lnxpylnxpy@gmail.com"
-__version__ = "0.3.2"
+__version__ = "0.3.3"
