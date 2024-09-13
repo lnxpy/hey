@@ -1,5 +1,6 @@
 import os
 import time
+import keyring
 
 from openai import OpenAI, OpenAIError
 from rich.console import Console
@@ -16,14 +17,13 @@ class Auth:
         self.is_valid = False
 
     def validate(self) -> str:
-        token = os.environ.get("HEY_TOKEN", None)
+        token = keyring.get_password("system","HEY_TOKEN")
         if token:
             self.is_valid = True
             return token
-        else:
-            raise TokenIsNotDefined(
-                "make sure the `HEY_TOKEN` is defined in the .bashrc/.zshrc file."
-            )
+        raise TokenIsNotDefined(
+            "Token is not defined, Use `hey token [token]` to set token."
+        )
 
 
 class ChatGPT:
