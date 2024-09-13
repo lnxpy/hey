@@ -74,3 +74,12 @@ def ask(
 
     result = answer(user_input, no_style)
     console.print(result)
+
+@app.command()
+def token(
+    user_input: str,
+):
+    """
+    Take HEY_TOKEN from user.
+    """
+    keyring.set_password("system","HEY_TOKEN",user_input)
