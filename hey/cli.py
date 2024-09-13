@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import Annotated, Optional
 
 import typer
+import keyring
 from rich.markdown import Markdown
 from rich.panel import Panel
 
