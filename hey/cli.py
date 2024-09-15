@@ -3,6 +3,7 @@ from typing import Annotated, Optional
 
 import typer
 import keyring
+import getpass
 from rich.markdown import Markdown
 from rich.panel import Panel
 
@@ -78,9 +79,10 @@ def ask(
 
 @app.command()
 def token(
-    user_input: str,
+    user_input: str, # This for unhandled exceptions that happen when user gives too many args.
 ):
     """
     Take HEY_TOKEN from user.
     """
-    keyring.set_password("system","HEY_TOKEN",user_input)
+    password = getpass.getpass("Copy and paste token here, [Token will not be echoed] > ")
+    keyring.set_password("system","HEY_TOKEN",password)
