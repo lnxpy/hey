@@ -33,7 +33,7 @@ pip install git+http://github.com/lnxpy/hey.git
 <details>
   <summary><h4>2. Set the <code>HEY_TOKEN</code></h4></summary>
 
-Once you got the package installed on your system, it's time to add the token that you just copied from [mdb.ai](https://mdb.ai) into hey, use `hey token` to add your token.
+Once you got the package installed on your system, it's time to add the token that you just copied from [mdb.ai](https://mdb.ai) into hey, use `hey auth` to add your token.
 
 > :warning:: Your token will not be echoed.
 </details>

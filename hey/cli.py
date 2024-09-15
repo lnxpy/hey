@@ -78,11 +78,11 @@ def ask(
     console.print(result)
 
 @app.command()
-def token(
+def auth(
     user_input: str, # This for unhandled exceptions that happen when user gives too many args.
 ):
     """
     Take HEY_TOKEN from user.
     """
-    password = getpass.getpass("Copy and paste token here, [Token will not be echoed] > ")
+    password = getpass.getpass("Copy and paste your token here, [Token will not be echoed] > ")
     keyring.set_password("system","HEY_TOKEN",password)
