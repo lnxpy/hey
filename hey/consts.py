@@ -5,6 +5,7 @@ from platformdirs import user_config_path
 
 # App name
 APP_NAME = "Hey"
+HEY_TOKEN_KEY = "HEY_TOKEN"
 
 if platform.system().lower() == "windows":
     DEFAULT_EDITOR = os.environ.get("EDITOR", "notepad")

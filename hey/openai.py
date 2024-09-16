@@ -1,5 +1,6 @@
 import os
 import time
+import keyring
 
 from openai import OpenAI, OpenAIError
 from rich.console import Console
@@ -8,6 +9,7 @@ from rich.panel import Panel
 
 from hey.configs import configs
 from hey.consts import BASE_CONFIG
+from hey.consts import HEY_TOKEN_KEY
 from hey.exceptions import ConnectionIssue, TokenIsNotDefined
 
 
@@ -16,14 +18,13 @@ class Auth:
         self.is_valid = False
 
     def validate(self) -> str:
-        token = os.environ.get("HEY_TOKEN", None)
+        token = keyring.get_password("system",HEY_TOKEN_KEY)
         if token:
             self.is_valid = True
             return token
-        else:
-            raise TokenIsNotDefined(
-                "make sure the `HEY_TOKEN` is defined in the .bashrc/.zshrc file."
-            )
+        raise TokenIsNotDefined(
+            "token is not defined, Use `hey auth` to set your token."
+        )
 
 
 class ChatGPT:

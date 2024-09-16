@@ -31,19 +31,11 @@ pip install git+http://github.com/lnxpy/hey.git
 </details>
 
 <details>
-  <summary><h4>2. Set the <code>HEY_TOKEN</code> environment variable</h4></summary>
+  <summary><h4>2. Set the <code>HEY_TOKEN</code></h4></summary>
 
-Once you got the package installed on your system, it's time to add the token that you just copied from [mdb.ai](https://mdb.ai) into either the `.bashrc` (or `.zshrc`) file.
+Once you got the package installed on your system, it's time to add the token that you just copied from [mdb.ai](https://mdb.ai) into hey, use `hey auth` to add your token.
 
-- If you use the default bash shell
-```sh
-echo "export HEY_TOKEN=<TOKEN>" >> ~/.bashrc
-```
-- If you use ZSH
-```sh
-echo "export HEY_TOKEN=<TOKEN>" >> ~/.zshrc
-```
-
+> :warning:: Your token will not be echoed.
 </details>
 
 ### Usage
