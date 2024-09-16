@@ -22,7 +22,7 @@ class Auth:
             self.is_valid = True
             return token
         raise TokenIsNotDefined(
-            "Token is not defined, Use `hey auth` to set your token."
+            "token is not defined, Use `hey auth` to set your token."
         )
 
 
