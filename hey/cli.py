@@ -78,9 +78,7 @@ def ask(
     console.print(result)
 
 @app.command()
-def auth(
-    user_input: str, # This for unhandled exceptions that happen when user gives too many args.
-):
+def auth():
     """
     Take HEY_TOKEN from user.
     """
