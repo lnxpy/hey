@@ -1,15 +1,13 @@
-import os
 import time
-import keyring
 
+import keyring
 from openai import OpenAI, OpenAIError
 from rich.console import Console
 from rich.markdown import Markdown
 from rich.panel import Panel
 
 from hey.configs import configs
-from hey.consts import BASE_CONFIG
-from hey.consts import HEY_TOKEN_KEY
+from hey.consts import BASE_CONFIG, HEY_TOKEN
 from hey.exceptions import ConnectionIssue, TokenIsNotDefined
 
 
@@ -18,12 +16,12 @@ class Auth:
         self.is_valid = False
 
     def validate(self) -> str:
-        token = keyring.get_password("system",HEY_TOKEN_KEY)
+        token = keyring.get_password("system", HEY_TOKEN)
         if token:
             self.is_valid = True
             return token
         raise TokenIsNotDefined(
-            "token is not defined, Use `hey auth` to set your token."
+            "token is not defined, Use `hey auth` to set the token."
         )
 
 

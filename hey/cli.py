@@ -1,18 +1,17 @@
+import getpass
 from datetime import datetime
 from typing import Annotated, Optional
 
-import typer
 import keyring
-import getpass
+import typer
 from rich.markdown import Markdown
 from rich.panel import Panel
 
 from hey import __version__, console
 from hey.configs import cli, configs
-from hey.consts import APP_NAME
+from hey.consts import APP_NAME, HEY_TOKEN
 from hey.editor import open_tmp_editor
 from hey.openai import answer
-from hey.consts import HEY_TOKEN_KEY
 
 app = typer.Typer()
 app.add_typer(cli.app, name="config")
@@ -78,10 +77,12 @@ def ask(
     result = answer(user_input, no_style)
     console.print(result)
 
+
 @app.command()
 def auth():
     """
-    Take HEY_TOKEN from user.
+    Set the token.
     """
-    password = getpass.getpass("Copy and paste your token here, [Token will not be echoed] > ")
-    keyring.set_password("system",HEY_TOKEN_KEY,password)
+
+    token = getpass.getpass("Token:")
+    keyring.set_password("system", HEY_TOKEN, token)

@@ -17,7 +17,7 @@ def open_tmp_editor() -> str:
 
     subprocess.run([DEFAULT_EDITOR, temp_file_path])
 
-    with open(temp_file_path, "r") as file:
+    with open(temp_file_path) as file:
         data = file.read()
 
     os.unlink(temp_file_path)

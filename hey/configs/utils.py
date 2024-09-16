@@ -1,7 +1,8 @@
 import json
 import os
-from hey.consts import CONFIG_FILE_PATH, BASE_CONFIG, APP_CONFIG_DIR
+
 from hey import console
+from hey.consts import APP_CONFIG_DIR, BASE_CONFIG, CONFIG_FILE_PATH
 
 
 def read_configs() -> dict:
@@ -13,7 +14,7 @@ def read_configs() -> dict:
 
     if os.path.exists(CONFIG_FILE_PATH):
         try:
-            with open(CONFIG_FILE_PATH, "r") as file:
+            with open(CONFIG_FILE_PATH) as file:
                 return json.loads(file.read())
         except json.JSONDecodeError as e:
             error_message = (
