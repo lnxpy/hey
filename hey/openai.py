@@ -9,6 +9,7 @@ from rich.panel import Panel
 
 from hey.configs import configs
 from hey.consts import BASE_CONFIG
+from hey.consts import HEY_TOKEN_KEY
 from hey.exceptions import ConnectionIssue, TokenIsNotDefined
 
 
@@ -17,7 +18,7 @@ class Auth:
         self.is_valid = False
 
     def validate(self) -> str:
-        token = keyring.get_password("system","HEY_TOKEN")
+        token = keyring.get_password("system",HEY_TOKEN_KEY)
         if token:
             self.is_valid = True
             return token
