@@ -1,0 +1,25 @@
+name: Update the PyPI chart badge
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"  # <= runs every month
+  workflow_dispatch:
+
+jobs:
+  update-chart-badge:
+    name: Updating the pypi chart badge
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Updating the badge
+        uses: lnxpy/pypi-chart-badge@v1
+        with:
+          package_name: 'hey-mindsdb'
+
+      - uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
+          message: 'chart badge updated'
