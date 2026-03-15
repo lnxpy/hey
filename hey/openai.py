@@ -38,7 +38,7 @@ class ChatGPT:
         self.prompt = prompt
 
     def ask(self, text: str) -> str:
-        if not text:
+        if not text or not text.strip():
             raise ValueError("provide a valid input.")
         try:
             client_mindsdb_serve = OpenAI(
@@ -77,21 +77,22 @@ def answer(question: str, no_style: bool) -> str | Panel:
     ):
         start_time = time.time()
         c = ChatGPT()
-        result = Markdown(
-            c.ask(question),
-            code_theme=configs.get("code_block_theme", BASE_CONFIG["code_block_theme"]),
-        )
+        raw_answer = c.ask(question)
         end_time = time.time()
 
     if no_style:
-        return result
-    else:
-        paneled = Panel(
-            result,
-            border_style="green",
-            title=":sparkles:",
-            subtitle=f"~{end_time-start_time:.1f}s",
-            subtitle_align="right",
-            title_align="left",
-        )
-        return paneled
+        return raw_answer
+
+    result = Markdown(
+        raw_answer,
+        code_theme=configs.get("code_block_theme", BASE_CONFIG["code_block_theme"]),
+    )
+    paneled = Panel(
+        result,
+        border_style="green",
+        title=":sparkles:",
+        subtitle=f"~{end_time-start_time:.1f}s",
+        subtitle_align="right",
+        title_align="left",
+    )
+    return paneled
