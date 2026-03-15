@@ -28,7 +28,8 @@ def read_configs() -> dict:
 
 
 def init_config():
-    with open(CONFIG_FILE_PATH, "w+") as conf_file:
+    os.makedirs(APP_CONFIG_DIR, exist_ok=True)
+    with open(CONFIG_FILE_PATH, "w+", encoding="utf-8") as conf_file:
         conf_file.write(json.dumps(BASE_CONFIG, indent=4))
 
 
