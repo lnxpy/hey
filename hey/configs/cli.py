@@ -15,7 +15,7 @@ app = typer.Typer(help="Configuration management.")
 def create():
     """Create a base config file."""
     if not config_exists():
-        os.makedirs(APP_CONFIG_DIR)
+        os.makedirs(APP_CONFIG_DIR, exist_ok=True)
         init_config()
     else:
         if Confirm.ask(
