@@ -38,7 +38,7 @@ class ChatGPT:
         self.prompt = prompt
 
     def ask(self, text: str) -> str:
-        if not text:
+        if not text or not text.strip():
             raise ValueError("provide a valid input.")
         try:
             client_mindsdb_serve = OpenAI(
