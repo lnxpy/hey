@@ -45,6 +45,9 @@ def main(
 
     if ctx.invoked_subcommand is None:
         user_input = open_tmp_editor()
+        if not user_input.strip():
+            console.print("No input provided.")
+            raise typer.Exit(code=1)
         markdown_input = Markdown(
             user_input, code_theme=configs.get("code_block_theme")
         )
@@ -74,6 +77,9 @@ def ask(
     Ask Hey directly in-command.
     """
 
+    if not user_input.strip():
+        console.print("No input provided.")
+        raise typer.Exit(code=1)
     result = answer(user_input, no_style)
     console.print(result)
 
