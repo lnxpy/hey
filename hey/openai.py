@@ -65,7 +65,7 @@ def answer(question: str, no_style: bool) -> str | Panel:
 
     Args:
         question (str): question phrase
-        no_style (bool): whether returning in a panel or not
+        no_style (bool): whether returning the raw response text or a styled panel
 
     Returns:
         str | Panel: solid raw result or paneled
@@ -77,21 +77,22 @@ def answer(question: str, no_style: bool) -> str | Panel:
     ):
         start_time = time.time()
         c = ChatGPT()
-        result = Markdown(
-            c.ask(question),
-            code_theme=configs.get("code_block_theme", BASE_CONFIG["code_block_theme"]),
-        )
+        raw_result = c.ask(question)
         end_time = time.time()
 
     if no_style:
-        return result
-    else:
-        paneled = Panel(
-            result,
-            border_style="green",
-            title=":sparkles:",
-            subtitle=f"~{end_time-start_time:.1f}s",
-            subtitle_align="right",
-            title_align="left",
-        )
-        return paneled
+        return raw_result
+
+    result = Markdown(
+        raw_result,
+        code_theme=configs.get("code_block_theme", BASE_CONFIG["code_block_theme"]),
+    )
+    paneled = Panel(
+        result,
+        border_style="green",
+        title=":sparkles:",
+        subtitle=f"~{end_time-start_time:.1f}s",
+        subtitle_align="right",
+        title_align="left",
+    )
+    return paneled
