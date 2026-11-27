@@ -26,6 +26,12 @@ pip install -U hey-mindsdb
 pip install git+http://github.com/lnxpy/hey.git
 ```
 
+###### Option C - Install with `pipx`
+Since Hey is a CLI application, installing it with [pipx](https://github.com/pypa/pipx) is recommended. `pipx` installs the app in an isolated environment while exposing the `hey` command globally.
+```sh
+pipx install hey-mindsdb
+```
+
 #### 2. Set the token
 Once you got the package installed on your system, it's time to set the token into hey. Run the following command to set the token.
 
